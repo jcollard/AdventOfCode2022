@@ -20,6 +20,11 @@ void ProcessData(string[] data, Action<int> onElfCount)
             calorieCount += int.Parse(line);
         }
     }
+    // If the last line is not empty, be sure to process the last elf
+    if (data[data.Length-1].Trim() != string.Empty)
+    {
+        onElfCount.Invoke(calorieCount);
+    }
 }
 
 void Part2(string[] data)
