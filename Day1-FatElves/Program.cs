@@ -1,7 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 string[] data = File.ReadAllLines("puzzle_input.txt");
 
-Part1(data);
+Part2(data);
 
 void ProcessData(string[] data, Action<int> onElfCount)
 {
