@@ -1,40 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 string[] data = File.ReadAllLines("puzzle_input.txt");
 
-
-Elf elf0 = new Elf(new int[]{1000, 2000, 3500});
-Elf elf1 = new Elf(new int[]{5333, 27});
-
-Console.WriteLine(elf0.TotalCalories());
-Console.WriteLine(elf1.TotalCalories());
-
-
-int TotalCalories(Elf elf)
-{
-    int total = 0;
-    foreach (int item in elf.Calories)
-    {
-        total += item;
-    }
-    return total;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Part1(data);
 
 void ProcessData(string[] data, Action<int> onElfCount)
 {
