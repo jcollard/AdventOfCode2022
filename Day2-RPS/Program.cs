@@ -9,9 +9,8 @@ void Part2()
     int roundNumber = 1;
     foreach (string round in data)
     {
-        string[] pair = round.Split();
-        Shape opponent = pair[0][0].ToShape();
-        Outcome outcome = pair[1][0].ToOutcome();
+        Shape opponent = round[0].ToShape();
+        Outcome outcome = round[2].ToOutcome();
         Shape player = outcome switch {
             Outcome.Win => opponent.LosesTo(),
             Outcome.Draw => opponent,
@@ -31,9 +30,8 @@ void Part1()
     int totalScore = 0;
     foreach (string round in data)
     {
-        Shape[] shapes = round.Split().Select(s => s[0].ToShape()).ToArray();
-        Shape opponent = shapes[0];
-        Shape player = shapes[1];
+        Shape opponent = round[0].ToShape();
+        Shape player = round[2].ToShape();
         totalScore += player.GetValue();
         totalScore += player.PointsAgainst(opponent);
     }
