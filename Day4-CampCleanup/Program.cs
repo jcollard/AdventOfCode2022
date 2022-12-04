@@ -17,6 +17,18 @@ first = new Range(6, 6);
 second = new Range(4, 6);
 Console.WriteLine($"{first} contains {second}: {Contains(first, second)}");
 
+string[] rows = File.ReadAllLines("sample.txt");
+int count = 0;
+foreach (string row in rows)
+{
+    (first, second) = ParseRanges(row);
+    if (Contains(first, second))
+    {
+        count++;
+    }
+}
+Console.WriteLine(count);
+
 bool Contains(Range first, Range second)
 {
     return (first.Start <= second.Start && first.End >= second.End) ||
