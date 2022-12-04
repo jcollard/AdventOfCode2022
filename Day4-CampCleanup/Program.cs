@@ -27,7 +27,7 @@ foreach (string row in rows)
         count++;
     }
 }
-Console.WriteLine(count);
+Console.WriteLine($"Found {count} pairs!");
 
 bool Contains(Range first, Range second)
 {
