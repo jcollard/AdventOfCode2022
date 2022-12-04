@@ -17,9 +17,10 @@ first = new Range(6, 6);
 second = new Range(4, 6);
 Console.WriteLine($"{first} contains {second}: {Contains(first, second)}");
 
-bool Contains(Range range, Range other)
+bool Contains(Range first, Range second)
 {
-    return false;
+    return (first.Start <= second.Start && first.End >= second.End) ||
+            (second.Start <= first.Start && second.End >= first.End);
 }
 
 (Range, Range) ParseRanges(string ranges)
