@@ -4,7 +4,7 @@ List<char>[] stacks = ParseStacks(rows);
 List<(int amount, int from, int to)> instructions = ParseInstructions(rows);
 foreach ((int a, int f, int t) inst in instructions)
 {
-    Move(inst.a, inst.f, inst.t, stacks);
+    MovePart2(inst.a, inst.f, inst.t, stacks);
 }
 Console.WriteLine(string.Join("",stacks.Select(s => s[0])));
 
@@ -23,13 +23,29 @@ List<(int amount, int from, int to)> ParseInstructions(string[] rows)
     return instructions;
 }
 
-void Move(int amount, int from, int to, List<char>[] stacks)
+void MovePart1(int amount, int from, int to, List<char>[] stacks)
 {
     while (amount-- > 0)
     {
         char toMove = stacks[from][0];
         stacks[from].RemoveAt(0);
         stacks[to].Insert(0, toMove);
+    }
+}
+
+void MovePart2(int amount, int from, int to, List<char>[] stacks)
+{
+    List<char> chunk = new ();
+    while (amount-- > 0)
+    {
+        char toMove = stacks[from][0];
+        stacks[from].RemoveAt(0);
+        chunk.Add(toMove);
+    }
+    chunk.Reverse();
+    foreach (char ch in chunk)
+    {
+        stacks[to].Insert(0, ch);
     }
 }
 
