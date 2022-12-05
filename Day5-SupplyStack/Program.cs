@@ -68,7 +68,7 @@ row = "move 1 from 1 to 2";
 instruction = ParseInstruction(row);
 Console.WriteLine($"{row} => {instruction}");
 
-Console.WriteLine("\nTest Predicates");
+Console.WriteLine("\nTest IsContainerRow");
 row = "move 1 from 2 to 1";
 Console.WriteLine($"{row} - Container? {IsContainerRow(row)} - Instruction? {IsInstructionRow(row)}");
 row = " 1   2   3 ";
@@ -78,28 +78,13 @@ Console.WriteLine($"{row} - Container? {IsContainerRow(row)} - Instruction? {IsI
 
 string[] rows = File.ReadAllLines("sample.txt");
 int count = GetNumberOfContainers(rows[0]);
-List<List<char>> supplyStacks = InitStacks(count);
-foreach (string r in rows)
+List<List<char>> supplyStacks = ParseSupplyStacks(rows);
+List<Instruction> instructions = ParseInstructions(rows);
+foreach (Instruction i in instructions)
 {
-    if (IsContainerRow(r))
-    {
-        ParseContainerRow(r, supplyStacks);
-    }
-    else if (IsInstructionRow(r))
-    {
-        Instruction i = ParseInstruction(r);
-        PerformInstruction(i, supplyStacks);
-    }
+    PerformInstruction(i, supplyStacks);
 }
 PrintStacks(supplyStacks);
-
-/// <summary>
-/// Given an input row, determines if it is a container row.
-/// </summary>
-bool IsContainerRow(string row)
-{
-    return row.Contains('[');
-}
 
 /// <summary>
 /// Given an input row, determines if it is an instruction.
@@ -107,6 +92,22 @@ bool IsContainerRow(string row)
 bool IsInstructionRow(string row)
 {
     return row.Contains("move");
+}
+
+/// <summary>
+/// Given an array of input rows, parse all instructions into a list.
+/// </summary>
+List<Instruction> ParseInstructions(string[] rows)
+{
+    List<Instruction> instructions = new ();
+    foreach (string row in rows)
+    {
+        if (IsInstructionRow(row))
+        {
+            instructions.Add(ParseInstruction(row));
+        }
+    }
+    return instructions;
 }
 
 /// <summary>
@@ -151,6 +152,30 @@ void PrintStacks(List<List<char>> stacks)
     {
         Console.WriteLine($"Stack {i + 1}: {string.Join(", ", stacks[i])}");
     }
+}
+
+/// <summary>
+/// Given the input rows, Parses the Supply Stacks
+/// </summary>
+List<List<char>> ParseSupplyStacks(string[] rows)
+{
+    List<List<char>> stacks = InitStacks(GetNumberOfContainers(rows[0]));
+    foreach (string row in rows)
+    {
+        if (IsContainerRow(row))
+        {
+            ParseContainerRow(row, stacks);
+        }
+    }
+    return stacks;
+}
+
+/// <summary>
+/// Given an input row, determines if it is a container row.
+/// </summary>
+bool IsContainerRow(string row)
+{
+    return row.Contains('[');
 }
 
 /// <summary>
