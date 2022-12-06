@@ -122,6 +122,8 @@ Instruction ParseInstruction(string row)
     return new Instruction(count, from, to);
 }
 
+
+
 /// <summary>
 /// Performs the specified instruction on the supply stacks
 /// </summary>
@@ -132,6 +134,8 @@ void PerformInstruction(Instruction instruction, List<List<char>> stacks)
         Move(instruction.From, instruction.To, stacks);
     }
 }
+
+
 
 /// <summary>
 /// Moves the top most item from one stack to another
