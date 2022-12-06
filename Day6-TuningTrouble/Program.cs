@@ -2,14 +2,15 @@
 FindWindow(input, 14);
 int FindWindow(string toScan, int windowSize)
 {
+
     for (int i = 0; i < toScan.Length - windowSize; i++)
     {
         string windowed = toScan[i..(i+windowSize)];
         if (windowed.ToHashSet().Count() == windowSize)
         {
             Console.WriteLine($"{windowed} @ {i} -> {i+windowSize}");
-            break;
+            return (i + windowSize);
         }
     }
-    return 0;
+    throw new Exception("Something terrible happened!");
 }
