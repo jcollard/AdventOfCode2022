@@ -29,11 +29,11 @@ public record ElfFile(string Name, int Size)
         string testInput = "14848514 b.txt";
         ElfFile result = ElfFile.Parse(testInput);
         ElfFile expected = new ElfFile("b.txt", 14848514);
-        Console.WriteLine($"ElfFile.Parse({testInput}) => {result}");
+        Console.WriteLine($"ElfFile.ParseElfFile({testInput}) => {result}");
         pass &= Test.Assert(result == expected, $"  Result ({result}) did not match expected ({expected})!");
         if (pass)
         {
-            Console.WriteLine($"ElfFile.TestParse: Pass!");
+            Console.WriteLine($"ElfFile.TestParseElfFile: Pass!");
         }
         return pass;
     }

@@ -37,6 +37,27 @@ public record ElfDirectory
         return size;
     }
 
+    public ElfDirectory? FindChild(string name)
+    {
+        foreach (ElfDirectory child in this._children)
+        {
+            if (child.Name == name)
+            {
+                return child;
+            }
+        }
+        return null;
+    }
+
+    public List<ElfDirectory> Children()
+    {
+        return this._children.ToList();
+    }
+
+    public List<ElfFile> Files()
+    {
+        return this._files.ToList();
+    }
     public static ElfDirectory Parse(string input, ElfDirectory parent)
     {
         // Pre Test
