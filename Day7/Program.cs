@@ -7,23 +7,18 @@
 //    a. Parse and IsParseable
 //    b. AddFile and Size
 //    c. TestExample and Size
-// 6. Write Implementation for ElfDirectory
 
+// 6. Parse input and build File System
+//   - ProcessFileLine
+//   - ProcessDirectoryLine
+//   - ProcessChangeDirLine 
+//   - BuildFileSystem
+
+// 7. FindAllDirectories
+// 8. Iterate over all Directories
+//    - Sum directories that are <= 100_000 in size
 RunTests();
-
-// ElfDirectory root = ParseFileSystem(File.ReadAllLines("input.txt"));
-
-// ElfDirectory ParseFileSystem(string[] row)
-// {
-//     ElfDirectory root = new ElfDirectory("/", null!);
-//     ElfDirectory currentDir = root;
-//     foreach (string input in File.ReadLines("input.txt"))
-//     {
-//         currentDir = ProcessLine(currentDir, input);
-//     }
-//     return root;
-// }
-
+SolvePart1("example.txt");
 
 bool RunTests()
 {
@@ -33,6 +28,7 @@ bool RunTests()
     pass &= TestProcessFileLine();
     pass &= TestProcessChangeDir();
     pass &= TestBuildFileSystem();
+    pass &= TestFindAllDirectories();
     if (pass)
     {
         Console.ForegroundColor = ConsoleColor.Green;
@@ -47,6 +43,60 @@ bool RunTests()
     return pass;
 }
 
+void SolvePart1(string filename)
+{
+    ElfDirectory root = BuildFileSystem(File.ReadAllLines(filename));
+    List<ElfDirectory> dirs = FindAllDirectories(root);
+    int sum = 0;
+    foreach (ElfDirectory dir in dirs)
+    {
+        int size = dir.Size();
+        if (size <= 100_000)
+        {
+            Console.WriteLine($"Found directory: {dir}");
+            sum += size;
+        }
+    }
+    Console.WriteLine($"The sum of the directories is {sum}");
+}
+
+List<ElfDirectory> FindAllDirectories(ElfDirectory toSearch)
+{
+    List<ElfDirectory> all = new ();
+    all.Add(toSearch);
+    foreach (ElfDirectory child in toSearch.Children())
+    {
+        all.AddRange(FindAllDirectories(child));
+    }
+    return all;
+}
+
+bool TestFindAllDirectories()
+{
+    bool pass = true;
+    Console.WriteLine("TestFindAllDirectories:");
+    ElfDirectory root = new ElfDirectory("/", null!);
+    ElfDirectory a = new ElfDirectory("a", root);
+    ElfDirectory b = new ElfDirectory("b", a);
+    ElfDirectory c = new ElfDirectory("c", root);
+    ElfDirectory d = new ElfDirectory("d", c);
+
+
+    List<ElfDirectory> all = FindAllDirectories(root);
+    pass &= Test.Assert(all.Count == 5, $"  There should be 4 directories but found {all.Count}");
+
+    pass &= Test.Assert(all.Contains(a), $"  'a' was not found.");
+    pass &= Test.Assert(all.Contains(b), $"  'b' was not  found.");
+    pass &= Test.Assert(all.Contains(c), $"  'c' was not  found.");
+    pass &= Test.Assert(all.Contains(d), $"  'd' was not  found.");
+
+    if (pass)
+    {
+        Console.WriteLine("TestFindAllDirectories Passed!");
+    }
+    return pass;
+}
+
 ElfDirectory BuildFileSystem(string[] rows)
 {
     ElfDirectory root = new ElfDirectory("/", null!);
@@ -57,12 +107,12 @@ ElfDirectory BuildFileSystem(string[] rows)
         {
             currentDir = ProcessFileLine(currentDir, input);
         }
-        
+
         if (ElfDirectory.IsParseable(input))
         {
             currentDir = ProcessDirectoryLine(currentDir, input);
         }
-        
+
         if (input.StartsWith("$ cd"))
         {
             currentDir = ProcessChangeDirectory(currentDir, input);
@@ -80,7 +130,7 @@ bool TestBuildFileSystem()
 
     ElfDirectory? a = root.FindChild("a");
     pass &= Test.Assert(a != null, $"  Expected root to have 'a' as child but it did not.");
-    
+
     ElfDirectory? e = a?.FindChild("e");
     pass &= Test.Assert(e != null, $"  Expected 'a' to have 'e' as child but it did not.");
 
@@ -95,7 +145,7 @@ bool TestBuildFileSystem()
     files = root.Files();
     pass &= Test.Assert(files != null && files.Contains(new ElfFile("b.txt", 14848514)), $"  Expected root to have b.txt but it did not.");
     pass &= Test.Assert(files != null && files.Contains(new ElfFile("c.dat", 8504156)), $"  Expected root to have c.dat but it did not.");
-    
+
     ElfDirectory? d = root.FindChild("d");
     pass &= Test.Assert(d != null, $"  Expected root to have 'd' as child but it did not.");
 
@@ -104,7 +154,7 @@ bool TestBuildFileSystem()
     pass &= Test.Assert(files != null && files.Contains(new ElfFile("d.log", 8033020)), $"  Expected 'd' to have file 'd.log' but it did not.");
     pass &= Test.Assert(files != null && files.Contains(new ElfFile("d.ext", 5626152)), $"  Expected 'd' to have file 'd.ext' but it did not.");
     pass &= Test.Assert(files != null && files.Contains(new ElfFile("k", 7214296)), $"  Expected 'd' to have file 'k' but it did not.");
-    
+
     if (pass)
     {
         Console.WriteLine("TestBuildFileSystem Passed!");
