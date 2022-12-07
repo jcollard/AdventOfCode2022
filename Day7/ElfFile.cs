@@ -1,6 +1,6 @@
 public record ElfFile(string Name, int Size)
 {
-    public static ElfFile ParseElfFile(string input)
+    public static ElfFile Parse(string input)
     {
         // Initial Test
         // return new ElfFile(string.Empty, 0);
@@ -16,22 +16,29 @@ public record ElfFile(string Name, int Size)
         return int.TryParse(tokens[0], out int _);
     }
 
-    public static bool TestParseElfFile()
+    public static bool RunTests()
+    {
+        bool result = TestIsParseable();
+        result &= TestParse();
+        return result;
+    }
+
+    private static bool TestParse()
     {
         bool pass = true;
         string testInput = "14848514 b.txt";
-        ElfFile result = ElfFile.ParseElfFile(testInput);
+        ElfFile result = ElfFile.Parse(testInput);
         ElfFile expected = new ElfFile("b.txt", 14848514);
-        Console.WriteLine($"ElfFile.ParseElfFile({testInput}) => {result}");
+        Console.WriteLine($"ElfFile.Parse({testInput}) => {result}");
         pass &= Test.Assert(result == expected, $"  Result ({result}) did not match expected ({expected})!");
         if (pass)
         {
-            Console.WriteLine($"ElfFile.TestParseElfFile: Pass!");
+            Console.WriteLine($"ElfFile.TestParse: Pass!");
         }
         return pass;
     }
 
-    public static bool TestIsParseable()
+    private static bool TestIsParseable()
     {
         bool pass = true;
         {
@@ -49,6 +56,7 @@ public record ElfFile(string Name, int Size)
             Console.WriteLine($"ElfFile.IsParseable({testInput}) => {result}");
             pass &= Test.Assert(result == expected, $"  Result ({result}) did not match expected ({expected})!");
         }
+
         {
             string testInput = "dir a";
             bool result = ElfFile.IsParseable(testInput);
@@ -56,17 +64,12 @@ public record ElfFile(string Name, int Size)
             Console.WriteLine($"ElfFile.IsParseable({testInput}) => {result}");
             pass &= Test.Assert(result == expected, $"  Result ({result}) did not match expected ({expected})!");
         }
+
         if (pass)
         {
             Console.WriteLine($"ElfFile.TestIsParseable: Pass!");
         }
-        return pass;
-    }
 
-    public static bool RunTests()
-    {
-        bool result = TestIsParseable();
-        result &= TestParseElfFile();
-        return result;
+        return pass;
     }
 }
