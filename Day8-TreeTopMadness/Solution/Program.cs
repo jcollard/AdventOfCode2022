@@ -1,14 +1,14 @@
-﻿string[] rows = File.ReadAllLines(args[0]);
-int[,] heightMap = HeightMap.ParseHeightMap(rows);
-int count = 0;
-for (int r = 0; r < heightMap.GetLength(0); r++)
-{
-    for (int c = 0; c < heightMap.GetLength(1); c++)
+﻿    string[] rows = File.ReadAllLines(args[0]);
+    int[,] heightMap = HeightMap.ParseHeightMap(rows);
+    int count = 0;
+    for (int r = 0; r < heightMap.GetLength(0); r++)
     {
-        if (HeightMap.IsVisible(heightMap, r, c))
+        for (int c = 0; c < heightMap.GetLength(1); c++)
         {
-            count++;
+            if (HeightMap.IsVisible(heightMap, r, c))
+            {
+                count++;
+            }
         }
     }
-}
-Console.WriteLine($"There are {count} visible trees.");
+    Console.WriteLine($"There are {count} visible trees.");
