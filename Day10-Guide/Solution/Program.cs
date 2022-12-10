@@ -2,12 +2,12 @@
 List<Instruction> instructions = Instruction.ParseInstructions(input);
 CPU CRT = new (instructions);
 int score = 0;
-while (CRT.Cycle <= 240)
+while (CRT.NextCycle <= 240)
 {
     CRT.Tick();
-    if (CRT.Cycle == 20 || (CRT.Cycle + 20) % 40 == 0)
+    if (CRT.NextCycle == 20 || (CRT.NextCycle + 20) % 40 == 0)
     {
-        score += CRT.X * CRT.Cycle;
-        Console.WriteLine($"Counter {CRT.Cycle} | Score: {score}");
+        score += CRT.X * CRT.NextCycle;
+        Console.WriteLine($"Counter {CRT.NextCycle} | Score: {score}");
     }
 }
