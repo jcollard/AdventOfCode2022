@@ -20,7 +20,7 @@ public record Solver(HeightMap Map)
     public Position? Step(Queue<Position> toVisit, HashSet<(int, int)> visited)
     {
         Position p = toVisit.Dequeue();
-        if (p.AsPair == Map.End.AsPair)
+        if (Map.End.Contains(p.AsPair))
         {
             return p;
         }
@@ -35,9 +35,9 @@ public record Solver(HeightMap Map)
         return null;
     }
 
-    public HashSet<Position> FindNeighbors(Position from, HashSet<(int, int)> visited)
+    public virtual HashSet<Position> FindNeighbors(Position from, HashSet<(int, int)> visited)
     {
-        return Map.FindNeighbors(from).Where(n => !visited.Contains(n.AsPair)).ToHashSet();
+        return Map.FindNeighborsUp(from).Where(n => !visited.Contains(n.AsPair)).ToHashSet();
     }
 
 }

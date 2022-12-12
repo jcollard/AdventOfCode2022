@@ -1,5 +1,7 @@
-public record HeightMap(int[,] Map, Position Start, Position End)
+public record HeightMap(int[,] Map, Position Start, HashSet<(int, int)> End)
 {
+
+    public HeightMap(int[,] Map, Position Start, Position End) : this(Map, Start, new HashSet<(int, int)>() { End.AsPair })  {}
 
     public void DisplayMap()
     {
@@ -27,25 +29,40 @@ public record HeightMap(int[,] Map, Position Start, Position End)
         return toHeight <= fromHeight + 1;
     }
 
-    public HashSet<Position> FindNeighbors(Position p)
+    public HashSet<Position> FindNeighborsUp(Position p)
     {
         return p.Neighbors.Where(IsInBounds)
                           .Where(n => CheckHeights(Map[p.Row, p.Col], Map[n.Row, n.Col]))
                           .ToHashSet();
     }
 
+    public HashSet<Position> FindNeighborsDown(Position p)
+    {
+        return p.Neighbors.Where(IsInBounds)
+                          .Where(n => CheckHeights(Map[n.Row, n.Col], Map[p.Row, p.Col]))
+                          .ToHashSet();
+    }
+
     public static HeightMap Parse(string[] rows)
+    {
+        return Parse(rows, 'S', 'E');
+    }
+
+    public static HeightMap Parse(string[] rows, char startChar, char endChar)
     {
         int[,] heightMap = new int[rows.Length, rows[0].Length];
         Position start = null!;
-        Position end = null!;
+        HashSet<(int, int)> end = new ();
         for (int row = 0; row < rows.Length; row++)
         {
             for (int col = 0; col < rows[0].Length; col++)
             {
                 char ch = rows[row][col];
-                start = ch == 'S' ? new Position(row, col, null) : start;
-                end = ch == 'E' ? new Position(row, col, null) : end;
+                start = ch == startChar ? new Position(row, col, null) : start;
+                if (ch == endChar)
+                {
+                    end.Add((row, col));
+                }
                 heightMap[row, col] = CharHeight(ch);
             }
         }

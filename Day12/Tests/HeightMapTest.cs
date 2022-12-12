@@ -24,19 +24,19 @@ public class HeightMapTest
         
         Position topLeft = new Position(0, 0, null);
         HashSet<Position> expected = new (){ new Position(1, 0, topLeft), new Position(0, 1, topLeft) };
-        Assert.Equal(expected, map.FindNeighbors(topLeft));
+        Assert.Equal(expected, map.FindNeighborsUp(topLeft));
 
         Position topRight = new Position(0, 2, null);
         expected = new (){ new Position(0, 1, topRight), new Position(1, 2, topRight) };
-        Assert.Equal(expected, map.FindNeighbors(topRight));
+        Assert.Equal(expected, map.FindNeighborsUp(topRight));
 
         Position bottomLeft  = new Position(2, 0, null);
         expected = new (){ new Position(2, 1, bottomLeft), new Position(1, 0, bottomLeft) };
-        Assert.Equal(expected, map.FindNeighbors(bottomLeft));
+        Assert.Equal(expected, map.FindNeighborsUp(bottomLeft));
 
         Position bottomRight  = new Position(2, 2, null);
         expected = new (){ new Position(1, 2, bottomRight), new Position(2, 1, bottomRight) };
-        Assert.Equal(expected, map.FindNeighbors(bottomRight));
+        Assert.Equal(expected, map.FindNeighborsUp(bottomRight));
     }
 
     [Fact(Timeout = 5000)]
@@ -48,7 +48,7 @@ public class HeightMapTest
             {2, 2, 2}
         };
         HeightMap map = new HeightMap(heights, new Position(0, 0, null), new Position(0, 0, null));
-        Assert.Empty(map.FindNeighbors(new Position(1, 1, null)));
+        Assert.Empty(map.FindNeighborsUp(new Position(1, 1, null)));
     }
 
     [Fact(Timeout = 5000)]
@@ -65,7 +65,7 @@ public class HeightMapTest
         {
             start.North, start.South, start.East, start.West
         };
-        Assert.Equal(expected, map.FindNeighbors(start));
+        Assert.Equal(expected, map.FindNeighborsUp(start));
     }
 
     [Fact(Timeout = 5000)]
@@ -82,7 +82,7 @@ public class HeightMapTest
         {
             start.North, start.South, start.East, start.West
         };
-        Assert.Equal(expected, map.FindNeighbors(start));
+        Assert.Equal(expected, map.FindNeighborsUp(start));
     }
 
     [Fact(Timeout = 5000)]
@@ -99,7 +99,7 @@ public class HeightMapTest
         {
             start.South, start.East, start.West
         };
-        Assert.Equal(expected, map.FindNeighbors(start));
+        Assert.Equal(expected, map.FindNeighborsUp(start));
     }
 
     [Fact(Timeout = 5000)]
@@ -116,7 +116,7 @@ public class HeightMapTest
         {
             start.South, start.North, start.West
         };
-        Assert.Equal(expected, map.FindNeighbors(start));
+        Assert.Equal(expected, map.FindNeighborsUp(start));
     }
 
     [Fact(Timeout = 5000)]
@@ -133,7 +133,7 @@ public class HeightMapTest
         {
             start.South, start.North, start.East
         };
-        Assert.Equal(expected, map.FindNeighbors(start));
+        Assert.Equal(expected, map.FindNeighborsUp(start));
     }
 
     [Fact(Timeout = 5000)]
@@ -150,6 +150,6 @@ public class HeightMapTest
         {
             start.West, start.North, start.East
         };
-        Assert.Equal(expected, map.FindNeighbors(start));
+        Assert.Equal(expected, map.FindNeighborsUp(start));
     }
 }
