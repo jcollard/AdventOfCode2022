@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solution", "Solution\Solution.csproj", "{87926815-E24F-42B2-B84F-55149200D7B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{C7287753-B2DB-4401-A944-6C596DEAF185}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{87926815-E24F-42B2-B84F-55149200D7B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87926815-E24F-42B2-B84F-55149200D7B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87926815-E24F-42B2-B84F-55149200D7B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87926815-E24F-42B2-B84F-55149200D7B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7287753-B2DB-4401-A944-6C596DEAF185}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7287753-B2DB-4401-A944-6C596DEAF185}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7287753-B2DB-4401-A944-6C596DEAF185}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7287753-B2DB-4401-A944-6C596DEAF185}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
