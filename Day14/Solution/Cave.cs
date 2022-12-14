@@ -7,13 +7,17 @@ public record Cave(HashSet<Position> Occupied, int MaxRow)
 
     public bool DropSand()
     {
+        if (Occupied.Contains(Origin))
+        {
+            return false;
+        }
         if (_backTracker.Count == 0)
         {
             _backTracker.Push(Origin);
         }
         foreach(Position next in _backTracker.Peek().Next)
         {
-            if (Occupied.Contains(next)) continue; // Don't check this space, 
+            if (this.Contains(next)) continue; // Don't check this space, 
             if (next.Row >= MaxRow) return false; // This space falls forever
             _backTracker.Push(next);
             return DropSand();
@@ -26,6 +30,11 @@ public record Cave(HashSet<Position> Occupied, int MaxRow)
         _sand.Add(toPlace);
         Occupied.Add(toPlace);
         return true;
+    }
+
+    public bool Contains(Position p)
+    {
+        return p.Row >= MaxRow || Occupied.Contains(p);
     }
 
     public static Cave Parse(string[] rows)
@@ -42,7 +51,7 @@ public record Cave(HashSet<Position> Occupied, int MaxRow)
                 occupied.UnionWith(ParseSegment(positions[i], positions[i+1]));
             }
         }
-        return new Cave(occupied, maxRow);
+        return new Cave(occupied, maxRow + 2);
     }
 
     public static HashSet<Position> ParseSegment(Position start, Position end)
@@ -70,7 +79,7 @@ public record Cave(HashSet<Position> Occupied, int MaxRow)
                 {
                     Console.Write("o");
                 }
-                else if (Occupied.Contains(p))
+                else if (this.Contains(p))
                 {
                     Console.Write("#");
                 }
