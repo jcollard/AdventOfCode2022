@@ -1,6 +1,6 @@
-﻿string[] rows = File.ReadAllLines("example.txt");
+﻿string[] rows = File.ReadAllLines("input.txt");
 Cave ofWonders = Cave.Parse(rows);
-ofWonders.Animate();
+ofWonders.Animate(10, 5);
 // do
 // {
 //     // Console.Clear();
