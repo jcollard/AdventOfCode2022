@@ -2,12 +2,14 @@ public record Sensor(int X, int Y, Position Beacon)
 {
     public int Radius { get; } = Math.Abs(X - Beacon.X) + Math.Abs(Y - Beacon.Y);
 
+    // Returns true if this Sensor can scan any positions in the specified row
     public bool HasRangeAtY(int y)
     {
         int yDiff = Math.Abs(Y - y);
         return Radius - yDiff >= 0;
     }
 
+    // Returns the Range of X positions this beacon can scan in the specified row
     public Range RangeAtY(int y)
     {
         if (!HasRangeAtY(y))
@@ -19,6 +21,7 @@ public record Sensor(int X, int Y, Position Beacon)
         return new Range(X - newRadius, X + newRadius);
     }
 
+    // Given a row in an input string, parses a Sensor
     public static Sensor Parse(string row)
     {
         // Sensor at x=2, y=18: closest beacon is at x=-2, y=15
