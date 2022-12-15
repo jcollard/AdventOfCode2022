@@ -28,5 +28,4 @@ public record Sand
         }
         return false;
     }
-
 }
