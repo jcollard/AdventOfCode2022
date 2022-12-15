@@ -1,6 +1,6 @@
 namespace Tests;
 
-public class HeightMapTest
+public class MazeTest
 {
     
 
@@ -12,7 +12,7 @@ public class HeightMapTest
             {0, 0, 0},
             {0, 0, 0},
         };
-        Terrain map = new Terrain(heights);
+        Maze map = new Maze(heights);
 
         Position topLeft = new Position(0, 0);
         List<Position> neighbors = map.FindNeighbors(topLeft);
@@ -48,7 +48,7 @@ public class HeightMapTest
             {0, 0, 1},
             {0, 0, 0},
         };
-        Terrain map = new Terrain(heights);
+        Maze map = new Maze(heights);
         Position center = new Position(1, 1);
         List<Position> result = map.FindNeighbors(center);
         List<Position> expected = new () { center.North, center.East, center.South, center.West };
@@ -63,7 +63,7 @@ public class HeightMapTest
             {2, 0, 2},
             {0, 2, 0},
         };
-        Terrain map = new Terrain(heights);
+        Maze map = new Maze(heights);
         Position center = new Position(1, 1);
         List<Position> result = map.FindNeighbors(center);
         Assert.Empty(result);
@@ -77,7 +77,7 @@ public class HeightMapTest
             {3, 1, 2},
             {0, 0, 0},
         };
-        Terrain map = new Terrain(heights);
+        Maze map = new Maze(heights);
         Position center = new Position(1, 1);
         List<Position> result = map.FindNeighbors(center);
         List<Position> expected = new () { center.East, center.South };

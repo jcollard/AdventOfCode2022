@@ -1,4 +1,4 @@
-public record Terrain(int[,] Heights)
+public record Maze(int[,] Heights)
 {
 
     public int Rows => Heights.GetLength(0);

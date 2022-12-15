@@ -1,6 +1,5 @@
-public static class Packet
+public static class Packets
 {
-
     public static string ListToString(List<object> objects)
     {
         List<string> asStrings = new();
@@ -18,13 +17,12 @@ public static class Packet
 
     public static int CompareElements(object first, object second)
     {
-        return (first, second) switch
-        {
+        return (first, second) switch {
             (int f, int s) => Math.Sign(f - s),
+            (List<object> f, List<object> s) => CompareLists(f, s),
             (int f, List<object> s) => CompareLists(new List<object>() {f}, s),
             (List<object> f, int s) => CompareLists(f, new List<object>() {s}),
-            (List<object> f, List<object> s) => CompareLists(f, s),
-            _ => throw new Exception($"Could not compare elements {first} vs. {second}."),
+            _ => throw new Exception($"Could not compare unknown elements {first} {second}"),
         };
     }
 
@@ -47,5 +45,4 @@ public static class Packet
         }
         return Math.Sign(first.Count - second.Count);
     }
-
 }

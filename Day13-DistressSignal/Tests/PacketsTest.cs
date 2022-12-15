@@ -137,5 +137,4 @@ public class PacketTest
         List<object> p1 = ListParser.Parse("[1,[2,[3,[4,[5,6,0]]]],8,9]");
         Assert.Equal(1, Packets.CompareElements(p0, p1));
     }
-
 }
