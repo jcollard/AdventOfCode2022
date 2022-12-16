@@ -1,0 +1,1 @@
+public record Location(int Id, int FlowRate, List<string> Edges);
