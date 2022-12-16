@@ -1,4 +1,4 @@
-public record ValveState(long BitMask)
+public record struct ValveState(long BitMask)
 {
     public ValveState TurnOn(Location l)
     {
