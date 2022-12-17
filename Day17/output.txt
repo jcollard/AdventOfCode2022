@@ -1,0 +1,136 @@
+D:\git\AdventOfCode2022\Day17\Solution\Simulator.cs(4,15): warning CS8618: Non-nullable property 'Board' must contain a non-null value when exiting constructor. Consider declaring the property as nullable. [D:\git\AdventOfCode2022\Day17\Solution\Solution.csproj]
+D:\git\AdventOfCode2022\Day17\Solution\Simulator.cs(120,18): warning CS8073: The result of the expression is always 'true' since a value of type 'State' is never equal to 'null' of type 'State?' [D:\git\AdventOfCode2022\Day17\Solution\Solution.csproj]
+D:\git\AdventOfCode2022\Day17\Solution\Simulator.cs(117,19): warning CS0219: The variable 'f' is assigned but its value is never used [D:\git\AdventOfCode2022\Day17\Solution\Solution.csproj]
+Cycle detected!
+
+
+Before Cycle
+
+
+.......
+.......
+.......
+.......
+.......
+.......
+.@@@@..
+....#..
+....#..
+....#..
+....#..
+.##.#..
+.##.#..
+..###..
+...#...
+..###..
+...#...
+..####.
+.....##
+.....##
+......#
+......#
+...####
+..###..
+...#...
+#..####
+#...#..
+#...#..
+#...##.
+##..##.
+######.
+.###...
+..#....
+.####..
+....##.
+....##.
+....#..
+..#.#..
+..#.#..
+#####..
+..###..
+...#...
+..####.
+
+
+With Cycle
+
+
+.......
+....@..
+....@..
+..@@@..
+.......
+.......
+.......
+....#..
+....#..
+....#..
+....#..
+.##.#..
+.##.#..
+..###..
+...#...
+..###..
+...#...
+..####.
+.....##
+.....##
+......#
+......#
+...####
+..###..
+...#...
+#..####
+#...#..
+#...#..
+#...##.
+##..##.
+######.
+.###...
+..#....
+.####..
+....#..
+....#..
+....#..
+....#..
+.##.#..
+.##.#..
+..###..
+...#...
+..###..
+...#...
+..####.
+.....##
+.....##
+......#
+......#
+...####
+..###..
+...#...
+#..####
+#...#..
+#...#..
+#...##.
+##..##.
+######.
+.###...
+..#....
+.####..
+....##.
+....##.
+....#..
+..#.#..
+..#.#..
+#####..
+..###..
+...#...
+..####.
+Cycle has height 27.
+Cycle found with 15 rocks.
+Height before cycle was 35
+Rocks before cycle was 20
+Need to run 66,666,666,665 cycles + 5 additional rocks
+Extra height 8
+Height is 1799999999998
+36
+17999999999999

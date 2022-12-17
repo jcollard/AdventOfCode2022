@@ -1,5 +1,20 @@
 public record Board(HashSet<Position> Rocks, Piece Falling, int HighestPoint)
 {
+    public TopRow TopRow 
+    {
+        get 
+        {
+            int mask = 0;
+            for (int col = 0; col < 7; col++)
+            {
+                if (Rocks.Contains(new Position(HighestPoint, col)))
+                {
+                    mask |= 1 << col;
+                }
+            }
+            return new TopRow(mask);
+        }
+    } 
     public bool TryShift(Position offset, out Board update)
     {
         update = this;
@@ -28,6 +43,14 @@ public record Board(HashSet<Position> Rocks, Piece Falling, int HighestPoint)
         int colShift = next.LeftMost + 2;
         next = next.Shift(new Position(rowShift, colShift));
         return new Board(nextRocks, next, nextHighest);
+    }
+
+    public Board SpawnPiece(Piece next)
+    {
+        int rowShift = HighestPoint + 4;
+        int colShift = next.LeftMost + 2;
+        next = next.Shift(new Position(rowShift, colShift));
+        return this with { Falling = next };
     }
 
     public void PrintBoard()

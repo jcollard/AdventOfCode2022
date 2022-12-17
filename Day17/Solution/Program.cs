@@ -8,8 +8,11 @@ while (s.SetPieces < 2022)
     // Console.WriteLine("\n\n=-=-=-=-=");
     // s.Board.PrintBoard();
     // Console.ReadLine();
-    s.Step();
-
+    // Console.WriteLine(s.Board.HighestPoint + 1);
+    if(s.Step() == false)
+    {
+        break;
+    }
     // Position attempt = s.StepJet();
     // // Console.Clear();
     // Console.WriteLine("\n\n=-=-=-=-=");
@@ -20,3 +23,5 @@ while (s.SetPieces < 2022)
     // s.StepFall();
 }
 Console.WriteLine(s.Board.HighestPoint + 1);
+// ulong val = 666_666_666_665 * 27 + 8 + 36;
+// Console.WriteLine(val);
