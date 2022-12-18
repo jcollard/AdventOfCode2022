@@ -14,6 +14,6 @@ public record Position(int X, int Y, int Z)
 
     public override string ToString()
     {
-        return $"Position(X = {X}, Y = {Y})";
+        return $"Position(X = {X}, Y = {Y}), Z = {Z}";
     }
 }
