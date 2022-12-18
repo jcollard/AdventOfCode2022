@@ -38,8 +38,8 @@ The most challenging part of these puzzles is often just figuring out what the
 heck you are supposed to do. If you can figure this out, you have a chance!
 
 To help encourage and help my own students to tackle these puzzles, I decided to
-create the **Beginner's Guide**. Thus far, I have completed a guide for days 1 -
-14. I intend to create guides for the remaining days. That said, a few of the
+create the **Beginner's Guide**. Thus far, I have completed a guide for days
+1-14. I intend to create guides for the remaining days. That said, a few of the
 days (16 and 17 as of writing) will not be **Beginner Guides** and instead will
 likely have their own little "series" to break down more advanced algorithmic
 concepts.
