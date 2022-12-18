@@ -1,10 +1,10 @@
 public record struct TopRow(int BitMask);
-public record struct State(TopRow TopRow, Piece NextPiece, string Moves);
+public record struct State(TopRow TopRow, Piece NextPiece, string Moves, int Id);
 
 public record Simulator(string Input)
 {
     public Board Board { get; private set; }
-    public IEnumerator<Position> JetStream { get; } = ParseJetStream(Input).GetEnumerator();
+    public IEnumerator<JetStream> Stream { get; } = JetStream.Parse(Input).GetEnumerator();
     public IEnumerator<Piece> PieceQueue { get; } = Piece.Pieces().GetEnumerator();
     public int SetPieces { get; private set; } = 0;
     public State LastPieceState { get; private set; }
@@ -19,7 +19,7 @@ public record Simulator(string Input)
             Piece first = PieceQueue.Current;
             Piece falling = PieceQueue.Current.Shift(new Position(3, 2));
             Board = new Board(new HashSet<Position>(), falling, 0);
-            PieceState = new State(Board.TopRow, falling, string.Empty);
+            PieceState = new State(Board.TopRow, falling, string.Empty, 0);
         }
     }
 
@@ -32,8 +32,9 @@ public record Simulator(string Input)
     public Position StepJet()
     {
         InitBoard();
-        JetStream.MoveNext();
-        Position offset = JetStream.Current;
+        Stream.MoveNext();
+        JetStream stream = Stream.Current;
+        Position offset = stream.Offset;
         char ch = offset == new Position(0, -1) ? '<' : '>';
         PieceState = PieceState with { Moves = PieceState.Moves + ch };
         
@@ -80,10 +81,10 @@ public record Simulator(string Input)
             
             int heightBeforeCycle = Board.HighestPoint;
             Console.WriteLine("\n\nBefore Cycle\n\n");
-            this.Board.PrintBoard();
+            // this.Board.PrintBoard();
             Board withCycle = DropPieces(cycle);
             Console.WriteLine("\n\nWith Cycle\n\n");
-            withCycle.PrintBoard();
+            // withCycle.PrintBoard();
 
             int heightAfterCycle = withCycle.HighestPoint;
             int cycleHeight = heightAfterCycle - heightBeforeCycle;
@@ -122,7 +123,7 @@ public record Simulator(string Input)
             Edges[LastPieceState] = PieceState;
         }
         LastPieceState = PieceState;
-        PieceState = new State(Board.TopRow, PieceQueue.Current, string.Empty);
+        PieceState = new State(Board.TopRow, PieceQueue.Current, string.Empty, Stream.Current.Id);
         return true;
     }
 
@@ -168,20 +169,6 @@ public record Simulator(string Input)
         return cycle;
     }
     
-    public static IEnumerable<Position> ParseJetStream(string row)
-    {
-        while(true)
-        {
-            foreach (char ch in row)
-            {
-                yield return ch switch 
-                {
-                    '>' => new Position(0, 1),
-                    '<' => new Position(0, -1),
-                    _ => throw new Exception($"Cannot parse jet stream char {ch}")
-                };
-            }
-        }
-    }
+    
     
 }
