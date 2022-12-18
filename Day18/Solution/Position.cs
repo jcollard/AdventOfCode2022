@@ -11,4 +11,9 @@ public record Position(int X, int Y, int Z)
     {
         Up, Down, Front, Back, Left, Right
     };
+
+    public override string ToString()
+    {
+        return $"Position(X = {X}, Y = {Y})";
+    }
 }

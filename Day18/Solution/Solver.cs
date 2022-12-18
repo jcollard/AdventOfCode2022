@@ -7,7 +7,7 @@ public record Solver(HashSet<Position> Cubes)
         {
             foreach (Position n in p.Neighbors)
             {
-                if (!Filled.Contains(n))
+                if (Filled.Contains(n))
                 {
                     exposed++;
                 }
@@ -19,6 +19,7 @@ public record Solver(HashSet<Position> Cubes)
     public HashSet<Position> Fill()
     {
         BoundingBox3D box = BoundingBox3D.Find(Cubes).Pad(1);
+        // Console.WriteLine($"Bound box: {box}");
         Position corner = new (box.MinX, box.MinY, box.MinZ);
         HashSet<Position> visited = new () { corner };
         Queue<Position> toVisit = new ();
@@ -26,11 +27,13 @@ public record Solver(HashSet<Position> Cubes)
         while (toVisit.Count > 0)
         {
             Position p = toVisit.Dequeue();
+            // Console.WriteLine($"Checking {p}");
             foreach (Position n in p.Neighbors)
             {
                 if (Cubes.Contains(n)) continue;
                 if (!box.Contains(n)) continue;
                 if (visited.Contains(n)) continue;
+                // Console.WriteLine($"Adding {n}");
                 visited.Add(n);
                 toVisit.Enqueue(n);
             }

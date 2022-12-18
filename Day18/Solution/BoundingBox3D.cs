@@ -15,10 +15,10 @@ public record BoundingBox3D(
     {
         return new BoundingBox3D(
             MinX - amount,
-            MinY - amount,
-            MinZ - amount,
             MaxX + amount,
+            MinY - amount,
             MaxY + amount,
+            MinZ - amount,
             MaxZ + amount
         );
     }
@@ -38,7 +38,7 @@ public record BoundingBox3D(
             maxY = Math.Max(maxY, p.Y);
             maxZ = Math.Max(maxZ, p.Z);   
         }
-        return new BoundingBox3D(minX, minY, minZ, maxX, maxY, maxZ);
+        return new BoundingBox3D(minX, maxX, minY, maxY, minZ, maxZ);
     }
 
 }
