@@ -57,19 +57,19 @@ high level approach that *SHOULD* be approachable in just about any language.
 The goal here isn't to show a solution in C# but instead guide a beginner
 through the process in their own language.
 
-* Day  1 - Calorie Counting: https://youtu.be/eQSO1Ov4k8g
-* Day  2 - Rock Paper Scissors: https://youtu.be/gLlj_P8edJY
-* Day  3 - Rucksack Reorganization: https://youtu.be/SYEMRTjDd9o
-* Day  4 - Camp Cleanup: https://youtu.be/vIIYaAw0B9o
-* Day  5 - Supply Stacks: https://youtu.be/kqQnSRJG2W4
-* Day  6 - Tuning Trouble: https://youtu.be/M3Qf7RXk_xs
-* Day  7 - No Space Left On Device: https://youtu.be/vWXtVGQ2B0E
-* Day  8 - Treetop Tree House: https://youtu.be/RJDgMcrJ8wE
-* Day  9 - Rope Bridge: https://youtu.be/xP1jHu6rHzA
-* Day 10 - Cathode-Ray Tube: https://youtu.be/xHHpGw3SlL0
-* Day 11 - Monkey in the Middle: https://youtu.be/P8P0DypR3Gg 
-* Day 12 - Hill Climbing: https://youtu.be/xcIUM003HS0
-* Day 13 - Distress Signal: https://youtu.be/ApAC2ZdNYEQ
-* Day 14 - Regolith Reservoir: https://youtu.be/LGF-7qfmoxk
+* Day  1 - Calorie Counting: [https://youtu.be/eQSO1Ov4k8g](https://youtu.be/eQSO1Ov4k8g)
+* Day  2 - Rock Paper Scissors: [https://youtu.be/gLlj_P8edJY](https://youtu.be/gLlj_P8edJY)
+* Day  3 - Rucksack Reorganization: [https://youtu.be/SYEMRTjDd9o](https://youtu.be/SYEMRTjDd9o)
+* Day  4 - Camp Cleanup: [https://youtu.be/vIIYaAw0B9o](https://youtu.be/vIIYaAw0B9o)
+* Day  5 - Supply Stacks: [https://youtu.be/kqQnSRJG2W4](https://youtu.be/kqQnSRJG2W4)
+* Day  6 - Tuning Trouble: [https://youtu.be/M3Qf7RXk_xs](https://youtu.be/M3Qf7RXk_xs)
+* Day  7 - No Space Left On Device: [https://youtu.be/vWXtVGQ2B0E](https://youtu.be/vWXtVGQ2B0E)
+* Day  8 - Treetop Tree House: [https://youtu.be/RJDgMcrJ8wE](https://youtu.be/RJDgMcrJ8wE)
+* Day  9 - Rope Bridge: [https://youtu.be/xP1jHu6rHzA](https://youtu.be/xP1jHu6rHzA)
+* Day 10 - Cathode-Ray Tube: [https://youtu.be/xHHpGw3SlL0](https://youtu.be/xHHpGw3SlL0)
+* Day 11 - Monkey in the Middle: [https://youtu.be/P8P0DypR3Gg](https://youtu.be/P8P0DypR3Gg)
+* Day 12 - Hill Climbing: [https://youtu.be/xcIUM003HS0](https://youtu.be/xcIUM003HS0)
+* Day 13 - Distress Signal: [https://youtu.be/ApAC2ZdNYEQ](https://youtu.be/ApAC2ZdNYEQ)
+* Day 14 - Regolith Reservoir: [https://youtu.be/LGF-7qfmoxk](https://youtu.be/LGF-7qfmoxk)
 
 Happy Coding!
