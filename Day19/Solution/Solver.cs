@@ -7,13 +7,13 @@ public record Solver(BluePrint BluePrint)
     public int Solve(int time)
     {
         Best = new State(time, new Factory(BluePrint, new StockPile(0, 0, 0, 0), new Bots(1, 0, 0, 0)));
-        return Solve(Best);
+        return Solve(Best, new HashSet<BotType>());
     }
 
     private State Best;
-    private int MaxSearchSpace = 500_000;
+    private int MaxSearchSpace = 5_000_000;
 
-    public int Solve(State state)
+    public int Solve(State state, HashSet<BotType> optionsLastTime)
     {
         if (Memoized.Count > MaxSearchSpace)
         {
@@ -41,10 +41,20 @@ public record Solver(BluePrint BluePrint)
         }
 
         int max = state.Factory.StockPile.Geode;
-        foreach (Factory f in state.Factory.Outcomes(state.TimeRemaining))
+        foreach ((BotType choice, Factory f) in state.Factory.Outcomes(state.TimeRemaining, optionsLastTime))
         {
+            HashSet<BotType> options = state.Factory.ReasonableChoices(state.TimeRemaining, optionsLastTime).ToHashSet();
+            
             State nextState = new State(state.TimeRemaining - 1, f);
-            max = Math.Max(max, Solve(nextState));
+            if (choice == BotType.None)
+            {
+                // If we chose None last time, do not take any of the options
+                max = Math.Max(max, Solve(nextState, options));   
+            }
+            else
+            {
+                max = Math.Max(max, Solve(nextState, optionsLastTime));   
+            }
         }
         Memoized[state] = max;
         // Console.WriteLine($"{state} => {max}");

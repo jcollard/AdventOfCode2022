@@ -13,50 +13,55 @@ public record Factory(BluePrint BluePrint, StockPile StockPile, Bots Bots)
         return string.Join('\n', rows);
     }
 
-    public List<Factory> Outcomes(int time)
+    public List<(BotType, Factory)> Outcomes(int time, HashSet<BotType> optionsLastTime)
     {
-        List<Factory> choices = new();
+        List<(BotType, Factory)> choices = new();
 
         // If you have the resources, you can choose to make a bot OR not
         // TODO: Start with just 1... but maybe not
-        foreach (BotType t in ReasonableChoices(time))
+        foreach (BotType t in ReasonableChoices(time, optionsLastTime))
         {
-            choices.Add(CollectResourcesAndBuild(t, time));
+            choices.Add((t, CollectResourcesAndBuild(t, time)));
         }
 
         return choices;
     }
 
-    public List<BotType> ReasonableChoices(int time)
+    public List<BotType> ReasonableChoices(int time, HashSet<BotType> optionsLastTime)
     {
-        List<BotType> potentialBuilds = new();
+        List<BotType> potentialBuilds = new() { BotType.None };
         
         // Something about the cost of the bots is important here
         // Essentially, in our inputs, it is SO expensive to produce
         // Geode/Obsidian bots, if you can do it, you should. But, there are easily
-        // degenerate cases that prove this incorrect
-        if (BuildBot(BotType.Geode).IsValid())
+        // degenerate cases that prove this incorrect for low cost Geode / Obsidian bots.
+        if (!optionsLastTime.Contains(BotType.Geode) && BuildBot(BotType.Geode).IsValid())
         {
             potentialBuilds.Add(BotType.Geode);
-            // return new List<BotType>() {BotType.Geode};
+            return new List<BotType>() {BotType.Geode};
         }        
-        if (!IsObsidianInfinite(time) && BuildBot(BotType.Obsidian).IsValid())
+        if (!optionsLastTime.Contains(BotType.Obsidian) && !IsObsidianInfinite(time) && BuildBot(BotType.Obsidian).IsValid())
         {
             potentialBuilds.Add(BotType.Obsidian);
-            // return new List<BotType>() { BotType.Obsidian };
+            return new List<BotType>() { BotType.Obsidian };
         }
 
         // It is not true for the case of clay / ore bots.
-        if (!IsClayInfinite(time) && BuildBot(BotType.Clay).IsValid())
+        if (!optionsLastTime.Contains(BotType.Clay) && !IsClayInfinite(time) && BuildBot(BotType.Clay).IsValid())
         {
             potentialBuilds.Add(BotType.Clay);
         }
-        if (!IsOreInfinite(time) && BuildBot(BotType.Ore).IsValid())
+        if (!optionsLastTime.Contains(BotType.Ore) && !IsOreInfinite(time) && BuildBot(BotType.Ore).IsValid())
         {
             potentialBuilds.Add(BotType.Ore);
         }
         
-        return potentialBuilds.Count == 0 ? new List<BotType>(){BotType.None} : potentialBuilds;
+        // If we have no other choice, do nothing. Leaving None in creates a TON
+        // of options because IF we were able to buy something and didn't. The
+        // next time we can still buy it. Easily disprovable as an option.
+        // Really, we should say IF we were able to buy a specific bot last time
+        // and didn't, we shouldn't buy the bot next time either.
+        return potentialBuilds;
     }
 
     public bool IsOreInfinite(int time)
