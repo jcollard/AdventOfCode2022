@@ -1,0 +1,112 @@
+D:\git\AdventOfCode2022\Day19\Solution\Solver.cs(1,15): warning CS8618: Non-nullable field 'Best' must contain a non-null value when exiting constructor. Consider declaring the field as nullable. [D:\git\AdventOfCode2022\Day19\Solution\Solution.csproj]
+D:\git\AdventOfCode2022\Day19\Solution\Program.cs(5,6): warning CS8321: The local function 'Part2' is declared but never used [D:\git\AdventOfCode2022\Day19\Solution\Solution.csproj]
+D:\git\AdventOfCode2022\Day19\Solution\Factory.cs(108,31): warning CS8524: The switch expression does not handle some values of its input type (it is not exhaustive) involving an unnamed enum value. For example, the pattern '(BotType)5' is not covered. [D:\git\AdventOfCode2022\Day19\Solution\Solution.csproj]
+Starting solver for BP #1
+Best was: 0 searched 171494 nodes.
+Starting solver for BP #2
+72239 Nodes
+Best so far: State { TimeRemaining = 0, Factory = Factory: 
+  Stock: Or ( 5) | Cl (11) | Ob ( 4) | Ge ( 1)
+  Bots : Or ( 1) | Cl ( 2) | Ob ( 2) | Ge ( 1) }
+102195 Nodes
+Best so far: State { TimeRemaining = 0, Factory = Factory: 
+  Stock: Or ( 5) | Cl (99) | Ob ( 6) | Ge ( 2)
+  Bots : Or ( 1) | Cl ( 2) | Ob ( 2) | Ge ( 1) }
+167651 Nodes
+Best so far: State { TimeRemaining = 0, Factory = Factory: 
+  Stock: Or ( 5) | Cl (99) | Ob ( 8) | Ge ( 3)
+  Bots : Or ( 1) | Cl ( 2) | Ob ( 2) | Ge ( 1) }
+Best was: 3 searched 262044 nodes.
+Starting solver for BP #3
+59173 Nodes
+Best so far: State { TimeRemaining = 0, Factory = Factory: 
+  Stock: Or (99) | Cl (99) | Ob ( 6) | Ge ( 1)
+  Bots : Or ( 2) | Cl ( 4) | Ob ( 3) | Ge ( 1) }
+96151 Nodes
+Best so far: State { TimeRemaining = 0, Factory = Factory: 
+  Stock: Or ( 4) | Cl (99) | Ob ( 9) | Ge ( 2)
+  Bots : Or ( 1) | Cl ( 3) | Ob ( 3) | Ge ( 1) }
+142777 Nodes
+Best so far: State { TimeRemaining = 0, Factory = Factory: 
+  Stock: Or ( 4) | Cl (99) | Ob (12) | Ge ( 3)
+  Bots : Or ( 1) | Cl ( 3) | Ob ( 3) | Ge ( 1) }
+239439 Nodes
+Best so far: State { TimeRemaining = 0, Factory = Factory: 
+  Stock: Or (99) | Cl (99) | Ob (10) | Ge ( 4)
+  Bots : Or ( 3) | Cl ( 5) | Ob ( 5) | Ge ( 2) }
+289321 Nodes
+Best so far: State { TimeRemaining = 0, Factory = Factory: 
+  Stock: Or (99) | Cl (99) | Ob ( 8) | Ge ( 5)
+  Bots : Or ( 2) | Cl ( 4) | Ob ( 4) | Ge ( 2) }
+406712 Nodes
+Best so far: State { TimeRemaining = 0, Factory = Factory: 
+  Stock: Or (99) | Cl (99) | Ob (15) | Ge ( 6)
+  Bots : Or ( 3) | Cl ( 5) | Ob ( 5) | Ge ( 2) }
+480175 Nodes
+Best so far: State { TimeRemaining = 0, Factory = Factory: 
+  Stock: Or (99) | Cl (99) | Ob (12) | Ge ( 7)
+  Bots : Or ( 2) | Cl ( 4) | Ob ( 4) | Ge ( 2) }
+Reached max search space, returning best.
+Reached max search space, returning best.
+Reached max search space, returning best.
+Reached max search space, returning best.
+Reached max search space, returning best.
+Reached max search space, returning best.
+Reached max search space, returning best.
+Reached max search space, returning best.
+Reached max search space, returning best.
+Reached max search space, returning best.
+Best was: 7 searched 500034 nodes.
+Starting solver for BP #4
+289161 Nodes
+Best so far: State { TimeRemaining = 0, Factory = Factory: 
+  Stock: Or (99) | Cl (99) | Ob ( 6) | Ge ( 1)
+  Bots : Or ( 3) | Cl ( 8) | Ob ( 3) | Ge ( 1) }
+Best was: 1 searched 314581 nodes.
+Starting solver for BP #5
+Best was: 0 searched 151834 nodes.
+Starting solver for BP #6
+142950 Nodes
+Best so far: State { TimeRemaining = 0, Factory = Factory: 
+  Stock: Or ( 2) | Cl (20) | Ob ( 4) | Ge ( 1)
+  Bots : Or ( 1) | Cl ( 4) | Ob ( 2) | Ge ( 1) }
+283779 Nodes
+Best so far: State { TimeRemaining = 0, Factory = Factory: 
+  Stock: Or (99) | Cl (99) | Ob ( 6) | Ge ( 2)
+  Bots : Or ( 3) | Cl ( 7) | Ob ( 2) | Ge ( 1) }
+472071 Nodes
+Best so far: State { TimeRemaining = 0, Factory = Factory: 
+  Stock: Or (99) | Cl (99) | Ob ( 8) | Ge ( 3)
+  Bots : Or ( 3) | Cl ( 7) | Ob ( 2) | Ge ( 1) }
+Reached max search space, returning best.
+Reached max search space, returning best.
+Reached max search space, returning best.
+Reached max search space, returning best.
+Reached max search space, returning best.
+Reached max search space, returning best.
+Reached max search space, returning best.
+Reached max search space, returning best.
+Reached max search space, returning best.
+Reached max search space, returning best.
+Reached max search space, returning best.
+Reached max search space, returning best.
+Reached max search space, returning best.
+Reached max search space, returning best.
+Reached max search space, returning best.
+Reached max search space, returning best.
+Reached max search space, returning best.
+Reached max search space, returning best.
+Reached max search space, returning best.
+Reached max search space, returning best.
+Reached max search space, returning best.
+Reached max search space, returning best.
+Reached max search space, returning best.
+Reached max search space, returning best.
+Reached max search space, returning best.
+Reached max search space, returning best.
+Best was: 3 searched 500034 nodes.
+Starting solver for BP #7
+165653 Nodes
+Best so far: State { TimeRemaining = 0, Factory = Factory: 
+  Stock: Or (99) | Cl (99) | Ob ( 6) | Ge ( 1)
+  Bots : Or ( 3) | Cl ( 6) | Ob ( 3) | Ge ( 1) }

@@ -29,21 +29,34 @@ public record Factory(BluePrint BluePrint, StockPile StockPile, Bots Bots)
 
     public List<BotType> ReasonableChoices(int time)
     {
-        List<BotType> potentialBuilds = new() { BotType.Geode };
-        if (!IsOreInfinite(time))
+        List<BotType> potentialBuilds = new();
+        
+        // Something about the cost of the bots is important here
+        // Essentially, in our inputs, it is SO expensive to produce
+        // Geode/Obsidian bots, if you can do it, you should. But, there are easily
+        // degenerate cases that prove this incorrect
+        if (BuildBot(BotType.Geode).IsValid())
         {
-            potentialBuilds.Add(BotType.Ore);
+            potentialBuilds.Add(BotType.Geode);
+            // return new List<BotType>() {BotType.Geode};
+        }        
+        if (!IsObsidianInfinite(time) && BuildBot(BotType.Obsidian).IsValid())
+        {
+            potentialBuilds.Add(BotType.Obsidian);
+            // return new List<BotType>() { BotType.Obsidian };
         }
-        if (!IsClayInfinite(time))
+
+        // It is not true for the case of clay / ore bots.
+        if (!IsClayInfinite(time) && BuildBot(BotType.Clay).IsValid())
         {
             potentialBuilds.Add(BotType.Clay);
         }
-        if (!IsObsidianInfinite(time))
+        if (!IsOreInfinite(time) && BuildBot(BotType.Ore).IsValid())
         {
-            potentialBuilds.Add(BotType.Obsidian);
+            potentialBuilds.Add(BotType.Ore);
         }
-        potentialBuilds.Add(BotType.None);
-        return potentialBuilds.Where(b => BuildBot(b).IsValid()).ToList();
+        
+        return potentialBuilds.Count == 0 ? new List<BotType>(){BotType.None} : potentialBuilds;
     }
 
     public bool IsOreInfinite(int time)

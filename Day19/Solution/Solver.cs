@@ -11,7 +11,7 @@ public record Solver(BluePrint BluePrint)
     }
 
     private State Best;
-    private int MaxSearchSpace = 5_000_000;
+    private int MaxSearchSpace = 500_000;
 
     public int Solve(State state)
     {
