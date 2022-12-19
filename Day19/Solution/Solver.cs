@@ -4,9 +4,9 @@ public record Solver(BluePrint BluePrint)
     // State => Max Geodes
     public Dictionary<State, int> Memoized = new ();
 
-    public int Solve()
+    public int Solve(int time)
     {
-        Best = new State(24, new Factory(BluePrint, new StockPile(0,0,0,0), new Bots(1, 0, 0, 0)));
+        Best = new State(time, new Factory(BluePrint, new StockPile(0,0,0,0), new Bots(1, 0, 0, 0)));
         return Solve(Best);
     }
 
