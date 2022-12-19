@@ -2,18 +2,26 @@ public record Solver(BluePrint BluePrint)
 {
 
     // State => Max Geodes
-    public Dictionary<State, int> Memoized = new ();
+    public Dictionary<State, int> Memoized = new();
 
     public int Solve(int time)
     {
-        Best = new State(time, new Factory(BluePrint, new StockPile(0,0,0,0), new Bots(1, 0, 0, 0)));
+        Best = new State(time, new Factory(BluePrint, new StockPile(0, 0, 0, 0), new Bots(1, 0, 0, 0)));
         return Solve(Best);
     }
 
     private State Best;
+    private int MaxSearchSpace = 5_000_000;
 
     public int Solve(State state)
     {
+        if (Memoized.Count > MaxSearchSpace)
+        {
+            Console.WriteLine("Reached max search space, returning best.");
+            Memoized[state] = state.Factory.StockPile.Geode;
+            return Best.Factory.StockPile.Geode;
+        }
+
         if (Memoized.TryGetValue(state, out int result))
         {
             return result;
@@ -27,6 +35,7 @@ public record Solver(BluePrint BluePrint)
                 Console.WriteLine($"{Memoized.Count} Nodes");
                 Console.WriteLine($"Best so far: {Best}");
             }
+
             Memoized[state] = state.Factory.StockPile.Geode;
             return state.Factory.StockPile.Geode;
         }

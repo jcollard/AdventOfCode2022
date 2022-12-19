@@ -17,7 +17,7 @@ void Part2()
     foreach ((int id, int solution) in Solutions)
     {
         Console.WriteLine($"{id} => {solution} => Quality Level: {id*solution}");
-        product += solution;
+        product *= solution;
     }
     Console.WriteLine($"Total quality: {product}");
 }
