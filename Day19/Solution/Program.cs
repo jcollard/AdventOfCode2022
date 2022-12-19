@@ -1,7 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 BluePrint[] rows = File.ReadAllLines("input.txt").Select(BluePrint.Parse).ToArray();
-Part1();
-// Part2();
+// Part1();
+Part2();
 void Part2()
 {
     List<(int, int)> Solutions = new();
