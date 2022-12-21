@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 string[] rows = File.ReadAllLines("input.txt");
-Part2();
+// Part2();
+Part3();
 void Part1()
 {
     Dictionary<string, Expr> vars = Expr.Parse(rows);
@@ -18,14 +19,13 @@ void Part2()
     Expr left = vars[leftKey].Simplify(vars);
     Expr right = vars[rightKey].Simplify(vars);
     long rightVal = right.Eval(vars);
-    
-    Console.WriteLine($"{leftKey}: {left}");
-    Console.WriteLine($"{rightKey}: {right}");
+
+
 
     long max = 4_000_000_000_000;
     // long max = 9_223_372_036_854_775_807;
     long min = 3_000_000_000_000;
-    long humn = (max - min)/2;
+    long humn = (max - min) / 2;
     for (; ; )
     {
         Console.WriteLine($"{min}, {humn}, {max}");
@@ -44,7 +44,7 @@ void Part2()
             max = humn;
             humn = min + ((max - min) / 2);
             Console.WriteLine($"{result} != \n{rightVal}");
-            Console.WriteLine("Too high...");            
+            Console.WriteLine("Too high...");
         }
         else
         {
@@ -55,5 +55,20 @@ void Part2()
         }
         // Console.ReadLine();
     }
-    
+    Console.WriteLine($"{leftKey}: {left}");
+    Console.WriteLine($"{rightKey}: {right}");
+
+}
+
+void Part3()
+{
+    Dictionary<string, Expr> vars = Expr.Parse(rows);
+    vars.Remove("humn");
+    BinOp root = (BinOp)vars["root"];
+    string leftKey = ((Var)root.Left).Key;
+    string rightKey = ((Var)root.Right).Key;
+    Expr left = vars[leftKey].Simplify(vars);
+    Expr right = vars[rightKey].Simplify(vars);
+    long rightVal = right.Eval(vars);
+    Expr.MustBe(leftKey, rightVal, vars);
 }

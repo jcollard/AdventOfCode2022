@@ -3,6 +3,65 @@ public abstract record Expr
     public abstract long Eval(Dictionary<string, Expr> Lookup);
     public abstract Expr Simplify(Dictionary<string, Expr> Lookup);
 
+    public static void MustBe(string var, long val, Dictionary<string, Expr> Lookup)
+    {
+        Console.WriteLine($"{var} should be {val}");
+        // Console.ReadLine();
+        if (var == "humn")
+        {
+            return;
+        }
+        Expr expr = Lookup[var];
+        if (!(expr is BinOp))
+        {
+            throw new Exception($"Only works with binops? {expr}");
+        }
+        BinOp binop = (BinOp)expr;
+        Console.WriteLine($"{binop} = {val}");
+        Expr left = binop.Left.Simplify(Lookup);
+        Expr right = binop.Right.Simplify(Lookup);
+        string leftKey = ((Var)binop.Left).Key;
+        string rightKey = ((Var)binop.Right).Key;
+        if (left is Val)
+        {
+            Val v = new Val(val);
+            BinOp newExpr = binop.op switch {
+                '+' => new BinOp(v, left, '-'),
+                '*' => new BinOp(v, left, '/'),
+                '/' => new BinOp(left, v, '/'), // If the righ
+                '-' => new BinOp(left, v, '-'),
+            };
+            long leftV = ((Val)left).Value;
+            Console.WriteLine($"{leftKey} = {leftV}");
+            Console.WriteLine($"{rightKey} = {newExpr}");
+            long result = newExpr.Eval(Lookup);
+            Console.WriteLine($"{rightKey} = {result}");
+            MustBe(rightKey, result, Lookup);
+        }
+        else if (right is Val)
+        {
+            // left / Val = num
+            Val v = new Val(val);
+            BinOp newExpr = binop.op switch {
+                '+' => new BinOp(v, right, '-'),
+                '*' => new BinOp(v, right, '/'),
+                '/' => new BinOp(v, right, '*'), // If the righ
+                '-' => new BinOp(v, right, '+'),
+            };
+            long rightV = ((Val)right).Value;
+            Console.WriteLine($"{rightKey} = {rightV}");
+            Console.WriteLine($"{rightKey} = {newExpr}");
+            long result = newExpr.Eval(Lookup);
+            Console.WriteLine($"{leftKey} = {result}");
+            MustBe(leftKey, result, Lookup);
+        }
+        else
+        {
+            throw new Exception("Something terrible happened!");
+        }
+    }
+
+
     public static Dictionary<string, Expr> Parse(string[] rows)
     {
         Dictionary<string, Expr> lookup = new ();
