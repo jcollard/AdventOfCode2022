@@ -3,6 +3,7 @@ using System.Text;
 public abstract record Move
 {
     public abstract (Position, Facing) Perform(Position p, Facing f, Board b);
+    public abstract (Face, Position, Facing) Perform(Position p, Facing f, Face face);
 
     public static Queue<Move> Parse(string data)
     {
@@ -56,6 +57,8 @@ public record Step : Move
         Position next = b.NextPosition(p, f);
         return (next, f);
     }
+
+     public override (Face, Position, Facing) Perform(Position p, Facing f, Face face) => face.NextPosition(p, f);
 }
 
 public record RotateLeft : Move
@@ -68,6 +71,17 @@ public record RotateLeft : Move
             Facing.West => (p, Facing.South),
             Facing.South => (p, Facing.East),
             Facing.East => (p, Facing.North),
+            _ => throw new Exception($"Cannot rotate left with facing {f}"),
+        };
+    }
+
+    public override (Face, Position, Facing) Perform(Position p, Facing f, Face face) {
+        return f switch
+        {
+            Facing.North => (face, p, Facing.West),  
+            Facing.West => (face, p, Facing.South),
+            Facing.South => (face, p, Facing.East),
+            Facing.East => (face, p, Facing.North),
             _ => throw new Exception($"Cannot rotate left with facing {f}"),
         };
     }
@@ -84,6 +98,17 @@ public record RotateRight : Move
             Facing.South => (p, Facing.West),
             Facing.West => (p, Facing.North),
             _ => throw new Exception($"Cannot rotate right with facing {f}"),
+        };
+    }
+
+    public override (Face, Position, Facing) Perform(Position p, Facing f, Face face) {
+        return f switch
+        {
+            Facing.North => (face, p, Facing.East),  
+            Facing.East => (face, p, Facing.South),
+            Facing.South => (face, p, Facing.West),
+            Facing.West => (face, p, Facing.North),
+            _ => throw new Exception($"Cannot rotate left with facing {f}"),
         };
     }
 }
